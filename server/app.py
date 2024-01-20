@@ -55,10 +55,14 @@ class RestaurantByID(Resource):
     def get(self, id):
         restaurant= Restaurant.query.filter_by(id=id).first()
         
-        if not restaurant:
-            return jsonify({"error": "Restaurant not found"}), 404
-        
-        pizzas_dict = [
+        if restaurant is None:
+            return make_response(
+               jsonify({"error": "Restaurant not found"}), 
+               404
+            )
+            
+        else:
+          pizzas_dict = [
             OrderedDict([
                 ('id', pizza.id),
                 ('name', pizza.name),
@@ -84,17 +88,23 @@ class RestaurantByID(Resource):
         restaurant = Restaurant.query.filter_by(id=id).first()
 
         if restaurant:
+            RestaurantPizza.query.filter_by(restaurant_id=id).delete()
+            
             try:
-                # Delete the restaurant itself
                 db.session.delete(restaurant)
                 db.session.commit()
+                
             except Exception as e:
                 db.session.rollback()
-                return {'error': str(e)}, 500  # Internal Server Error
-
-            return '', 204
+                return {'error': str(e)}, 500
+            
+            response = make_response(jsonify(""), 204)
+            return response
+        
         else:
-            return {'error': 'Restaurant not found'}, 404
+            response = make_response(jsonify({ "error": "Restaurant not found"}), 404)
+            return response
+
           
        
 api.add_resource(RestaurantByID, '/restaurants/<int:id>')
@@ -105,7 +115,7 @@ class Pizzas(Resource):
         pizzas = Pizza.query.all()
         
         response_data = [
-                       OrderedDict([
+            OrderedDict([
             ('id', pizza.id),
             ('name', pizza.name),
             ('ingredients', pizza.ingredients),
@@ -151,7 +161,10 @@ class RestaurantPizzas(Resource):
             
         else:
             response = {"errors": ["validation errors"] }
-            return make_response(response, 404)
+            return make_response(
+                jsonify(response), 
+                404
+                )
         
 api.add_resource(RestaurantPizzas,'/restaurant_pizzas')
 
