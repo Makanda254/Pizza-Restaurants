@@ -6,17 +6,17 @@ body {
 }
 
 a {
-    color: rgb(23, 16, 235);
+    color: #0303af; 
 }
 
 a:hover {
-    color: rgb(214, 47, 9) !important;
+    color: #e74c3c;
     transition: color 0.8s ease !important;
 }
 
 header {
     padding: 15px;
-    background-color: rgb(204, 202, 198);
+    background-color: #2ecc71; 
     display: flex;
     justify-content: space-between;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -28,14 +28,6 @@ nav {
     gap: 40px;
 }
 
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
 
 header nav {
     display: flex;
@@ -54,7 +46,7 @@ header nav a {
 }
 
 .card {
-    background-color: rgb(127, 219, 150);
+    background-color: #f39c12; 
     padding: 20px;
     margin: 20px 0;
     border-radius: 10px;
@@ -75,11 +67,11 @@ button {
     padding: 10px 20px;
     font-size: 1rem;
     cursor: pointer;
-    background-color: rgb(23, 16, 235);
+    background-color: #3498db; 
     color: #fff;
     transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background-color: rgb(214, 47, 9);
+    background-color: #e74c3c; 
 }
