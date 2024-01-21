@@ -12,13 +12,13 @@ export default function Pizzas() {
     }, [])
 
   return (
-    <div>
+    <div className='container'>
         <h1>Check out this amazing pizzas and pick on your favorite restaurant on our home page to purchase...</h1>
         {pizzas.map((pizza)=>
-        <div key={pizza.id}>
-            <h3>{pizza.name}</h3>
+        <div key={pizza.id} className='card'>
+            <h3 style={{color: "blue"}}>Name: {pizza.name}</h3>
               <p>
-                <em>{pizza.ingredients}</em>
+                <em>Ingredients: {pizza.ingredients}</em>
               </p>
 
         </div>

@@ -35,18 +35,18 @@ export default function Restaurant() {
   return (
     <div className="container">
       <div className="card">
-        <h1>{restaurant.name}</h1>
+        <h1 style={{color: "blue"}}>{restaurant.name}</h1>
         <p>{restaurant.address}</p>
       </div>
 
       <div className="card">
-        <h2>Pizza Menu</h2>
+        <h2 style={{color: "blue"}}>Pizza Menu</h2>
         {pizzas && pizzas.length > 0 ? (
           pizzas.map((restaurant_pizza) => (
             <div key={restaurant_pizza.id}>
               <h3>{restaurant_pizza.name}</h3>
               <p>
-                <em>{restaurant_pizza.ingredients}</em>
+                <em>Ingredients: {restaurant_pizza.ingredients}</em>
               </p>
             </div>
           ))
@@ -67,7 +67,7 @@ export default function Restaurant() {
             <div>There are no pizzas for sale at the moment</div>
           </div>
         )}
-        <h3>Add Piza</h3>
+        <h3 style={{color: "blue"}}>Add Piza</h3>
         <RestaurantPizza restaurantId={restaurant.id} onAddPizza={handleAddPizza}/>
       </div>
     </div>
