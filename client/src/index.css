@@ -1,69 +1,85 @@
 body {
     margin: 0;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    
-  }
-  
-  a {
-     color: rgb(23, 16, 235) ;
-   
-  }
- a:hover {
-  color:rgb(214, 47, 9) !important;
-  transition: 0.8s ease !important;
- }
-  header {
-    padding: 7px;
+}
+
+a {
+    color: rgb(23, 16, 235);
+}
+
+a:hover {
+    color: rgb(214, 47, 9) !important;
+    transition: color 0.8s ease !important;
+}
+
+header {
+    padding: 15px;
     background-color: rgb(204, 202, 198);
     display: flex;
     justify-content: space-between;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
-  }
-
-  nav {
+nav {
     display: flex;
     justify-content: space-around;
     gap: 40px;
-  }
-  
-  @keyframes spin {
+}
+
+@keyframes spin {
     0% {
-      transform: rotate(0deg);
+        transform: rotate(0deg);
     }
     100% {
-      transform: rotate(360deg);
+        transform: rotate(360deg);
     }
-  }
-  
-  header nav {
+}
+
+header nav {
     display: flex;
     align-items: center;
-    padding: 8px;
-  }
-  
-  header nav a {
-    font-size: 1.5rem;
-  }
-  
-  .container {
+    padding: 15px;
+}
+
+header nav a {
+    font-size: 1.6rem;
+    text-decoration: none;
+}
+
+.container {
     max-width: 800px;
     margin: 0 auto;
-  }
-  
-  .card {
-    background-color: rgb(127, 219, 150);
-    padding: 16px;
-    margin: 16px 0;
-    border-radius: 8px;
-  }
-  
-  form {
-    display: flex;
-    gap: 8px;
-  }
+}
 
-  button {
+.card {
+    background-color: rgb(127, 219, 150);
+    padding: 20px;
+    margin: 20px 0;
     border-radius: 10px;
-  }
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+button {
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    background-color: rgb(23, 16, 235);
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: rgb(214, 47, 9);
+}

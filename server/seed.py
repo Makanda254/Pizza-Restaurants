@@ -52,8 +52,7 @@ with app.app_context():
     pizzas = Pizza.query.all()
 
     for restaurant in restaurants:
-        restaurant = random.choice(restaurants)
-        for _ in range(random.randint(1, 4)):
+          for _ in range(random.randint(1, 4)):
             pizza = random.choice(pizzas)
             price = random.choice(prices)
 
