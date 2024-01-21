@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import RestaurantPizza from '../components/RestaurantPizza';
 
 export default function Restaurant() {
   const { id } = useParams();
@@ -10,7 +11,7 @@ export default function Restaurant() {
       .then((r) => r.json())
       .then((data) => {
         setRestaurant(data);
-        console.log('thrgbjjjnnk', data);
+        //console.log('thrgbjjjnnk', data);
       });
   }, [id]);
 
@@ -20,6 +21,16 @@ export default function Restaurant() {
   const pizzas = restaurant.pizzas;
 
   //console.log(pizzas);
+
+  function handleAddPizza(newRestaurantPizza) {
+    setRestaurant({
+        ...restaurant,
+        pizzas: [
+          ...restaurant.pizzas,
+          newRestaurantPizza,
+        ],
+    })}
+  
 
   return (
     <div className="container">
@@ -56,6 +67,8 @@ export default function Restaurant() {
             <div>There are no pizzas for sale at the moment</div>
           </div>
         )}
+        <h3>Add Piza</h3>
+        <RestaurantPizza restaurantId={restaurant.id} onAddPizza={handleAddPizza}/>
       </div>
     </div>
   );
