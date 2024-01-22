@@ -4,6 +4,7 @@ from flask import Flask, jsonify, make_response, Response, json, request
 from flask_migrate import Migrate
 from flask_restful import Api, Resource
 from collections import OrderedDict
+from flask_cors import CORS
 
 
 from models import Restaurant, RestaurantPizza, Pizza, db
@@ -12,6 +13,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+CORS(app)
 migrate = Migrate(app, db)
 
 db.init_app(app)
@@ -130,12 +132,13 @@ api.add_resource(Pizzas, '/pizzas')
         
 class RestaurantPizzas(Resource):
     def post(self):
-        
+        data = request.get_json()
+        print("tggt",data['price'] )
         restaurant_pizza = RestaurantPizza(
             
-            price= request.form.get('price'),
-            pizza_id=request.form.get('pizza_id'),
-            restaurant_id =request.form.get('restaurant_id'),
+            price= data['price'],
+            pizza_id= data['pizza_id'],
+            restaurant_id = data['restaurant_id'],
         
         )
         

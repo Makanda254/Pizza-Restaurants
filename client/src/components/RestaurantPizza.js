@@ -1,9 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 
-export default function RestaurantPizza({restaurantId, onAddPizza}) {
-  const [pizzas, setPizzas] = useState([]);
-  const [pizzaId, setPizzaId] = useState();
-  const [price, setPrice] = useState();
+export default function RestaurantPizza({ restaurantId, onAddPizza }) {
+  const [pizzas, setPizzas] = useState(['']);
+  const [pizzaId, setPizzaId] = useState(''); // Initialize with an empty string
+  const [price, setPrice] = useState('');
   const [formErrors, setFormErrors] = useState([]);
 
   useEffect(() => {
@@ -20,15 +20,15 @@ export default function RestaurantPizza({restaurantId, onAddPizza}) {
       restaurant_id: restaurantId,
     };
 
-    console.log(formData)
-    
+    console.log(formData);
+
     fetch("/restaurant_pizzas", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Accept": "application/json"
+        Accept: "application/json",
       },
-      body: JSON.stringify(formData)
+      body: JSON.stringify(formData),
     }).then((r) => {
       if (r.ok) {
         r.json().then((newPizzaRestaurant) => {
@@ -38,48 +38,47 @@ export default function RestaurantPizza({restaurantId, onAddPizza}) {
       } else {
         r.json().then((err) => setFormErrors(err.errors));
       }
-
     });
 
-    setPrice("")
-    setPizzaId("")
+    // Reset the state after submitting the form
+    setPizzaId('');
+    setPrice('');
   }
-  
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
-      <label htmlFor="pizza_id">Pizza:</label>
-      <select
-        id="pizza_id"
-        name="pizza_id"
-        value={pizzaId}
-        onChange={(e) => setPizzaId(e.target.value)}
-      >
-        <option value="">Select a pizza</option>
-        {pizzas.map((pizza) => (
-          <option key={pizza.id} value={pizza.id}>
-            {pizza.name}
-          </option>
-        ))}
-      </select>
-      <label htmlFor="price">Price:</label>
-      <input
-        id="price"
-        name="price"
-        type="number"
-        value={price}
-        onChange={(e) => setPrice(parseInt(e.target.value))}
-      />
-      {formErrors.length > 0
-        ? formErrors.map((err) => (
-            <p key={err} style={{ color: "red" }}>
-              {err}
-            </p>
-          ))
-        : null}
-      <button type="submit">Add To Restaurant</button>
-    </form>
-      
+        <label htmlFor="pizza_id">Pizza:</label>
+        <select
+          id="pizza_id"
+          name="pizza_id"
+          value={pizzaId}
+          onChange={(e) => setPizzaId(e.target.value)}
+        >
+          <option value="">Select a pizza</option>
+          {pizzas.map((pizza) => (
+            <option key={pizza.id} value={pizza.id}>
+              {pizza.name}
+            </option>
+          ))}
+        </select>
+        <label htmlFor="price">Price:</label>
+        <input
+          id="price"
+          name="price"
+          type="number"
+          value={price}
+          onChange={(e) => setPrice(parseInt(e.target.value) || '')} // Ensure that it's a number or an empty string
+        />
+        {formErrors.length > 0
+          ? formErrors.map((err) => (
+              <p key={err} style={{ color: "red" }}>
+                {err}
+              </p>
+            ))
+          : null}
+        <button type="submit">Add To Restaurant</button>
+      </form>
     </div>
-  )
+  );
 }
